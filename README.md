@@ -5,7 +5,8 @@ This project will manage access tokens (generation and validation) for the My-Fl
 ## Data Model
 
 The following is the data model used for the server, which can be seen at the models package.
-![Data Model Image Representation](server_data_mdel.png)
+
+![Data Model Image Representation](server_data_model.png)
 
 
 ## Cloud Firestore
