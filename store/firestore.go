@@ -15,8 +15,14 @@ const (
 	AuthCodesCollection = "authcodes"
 )
 
+var storeClient *firestore.Client = nil
+
 // InitializeFirestore initializes a Firestore client.
 func InitializeFirestore() (*firestore.Client, error) {
+	if storeClient != nil {
+		return storeClient, nil
+	}
+
 	err := godotenv.Load()
 	if err != nil {
 		return nil, fmt.Errorf("error loading .env file: %w", err)
@@ -25,10 +31,10 @@ func InitializeFirestore() (*firestore.Client, error) {
 	projectID := os.Getenv("PROJECT_ID")
 
 	ctx := context.Background()
-	client, err := firestore.NewClient(ctx, projectID)
+	storeClient, err = firestore.NewClient(ctx, projectID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create firestore client: %w", err)
 	}
 
-	return client, nil
+	return storeClient, nil
 }
